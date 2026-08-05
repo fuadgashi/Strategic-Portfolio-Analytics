@@ -1,9 +1,9 @@
-# DAX Functions Used in This Module
+# DAX Functions Used in This Solution
 
-Analytical Models draws on 3 functions from the solution's shared DAX
-time-intelligence library — the same reusable engine used across every module. Only
-the functions this module actually calls are documented below; the current/prior-year
-sales figures the BCG measures consume are themselves built from `YearToDate` and
+BCG Analytics draws on 3 functions from a shared DAX time-intelligence library — the
+same reusable engine used across the companion Power BI projects. Only the functions
+this solution actually calls are documented below; the current/prior-year sales
+figures the BCG measures consume are themselves built from `YearToDate` and
 `PriorYear` in the [Sales Analytics](https://github.com/fuadgashi/Sales-Analytics)
 repository's measure catalog.
 
@@ -30,7 +30,7 @@ function PriorYear =
 
 /// Rolling 12 months: evaluates the measure for dates from 12 months before today
 /// onward, respecting the current filter context. The window every segmentation
-/// calculated column in this module ranks products/outlets over.
+/// calculated column in this solution ranks products/outlets over.
 function Trailing12Months =
     (Measure: anyref expr) =>
         VAR Last12Months = EDATE(TODAY(), -12)

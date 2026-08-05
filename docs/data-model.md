@@ -1,16 +1,16 @@
 # Data Model
 
-This module answers a portfolio-strategy question that a plain sales ranking can't:
-*which brands and products are genuinely winning market position, which are just
-riding overall growth, and which customers/products should be treated as core vs.
-long-tail?* It layers a BCG growth-share model and a dynamic percentile segmentation
-on top of the same sales fact used elsewhere in the solution.
+This solution answers a portfolio-strategy question that a plain sales ranking
+can't: *which brands and products are genuinely winning market position, which are
+just riding overall growth, and which customers/products should be treated as core
+vs. long-tail?* It layers a BCG growth-share model and a dynamic percentile
+segmentation on top of the same sales fact used in the companion Power BI projects.
 
-> **Scope note.** This repository covers the **Analytical Models** module only — the
-> BCG growth-share matrix (brand and product level) and dynamic ABCD segmentation
-> (product and customer-outlet level). The full solution also includes separate
-> modules for sales monitoring, inventory, pricing & margin, trade marketing, and
-> sales planning, which are out of scope here.
+> **Scope note.** This repository covers **Analytical Models** only — the BCG
+> growth-share matrix (brand and product level) and dynamic ABCD segmentation
+> (product and customer-outlet level). Sales monitoring, inventory, pricing &
+> margin, trade marketing, and sales planning are covered in separate, standalone
+> Power BI projects and are out of scope here.
 
 ## Entity-relationship diagram
 
@@ -41,7 +41,7 @@ erDiagram
 
 | Table | Purpose |
 |---|---|
-| **Sales Invoice Lines** | The sales fact table (shared with the Sales Metrics module) — every growth, share, and segmentation calculation in this module reduces back to this table. Referenced here as an input only; see the [Sales Analytics](https://github.com/fuadgashi/Sales-Analytics) repository for its full measure catalog. |
+| **Sales Invoice Lines** | The sales fact table (shared with the Sales Analytics solution) — every growth, share, and segmentation calculation in this solution reduces back to this table. Referenced here as an input only; see the [Sales Analytics](https://github.com/fuadgashi/Sales-Analytics) repository for its full measure catalog. |
 
 ### Analytical table (no data rows — pure DAX)
 

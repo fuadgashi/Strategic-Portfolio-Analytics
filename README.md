@@ -4,20 +4,19 @@ A **Power BI** portfolio-analytics solution built for a multi-brand FMCG/consume
 goods distribution business — a BCG growth-share matrix at brand and product grain,
 plus dynamic percentile-based segmentation of products and customer outlets.
 
-This repository documents the architecture and DAX behind the solution's
-**Analytical Models** module. It's a portfolio write-up, not the live report: all
-entity names in the underlying model are generic sample labels (`Product 001`,
-`Brand 1`…), and no real business figures, screenshots, or connection details are
-included here.
+This repository documents the architecture and DAX behind this **BCG Analytics**
+solution. It's a portfolio write-up, not the live report: all entity names in the
+underlying model are generic sample labels (`Product 001`, `Brand 1`…), and no real
+business figures, screenshots, or connection details are included here.
 
 ## Business context
 
 A sales ranking tells you who's biggest. It doesn't tell you who's actually *winning
 ground*, who's a stable cash generator worth protecting, or which long-tail products
-and accounts are quietly consuming attention without earning it back. This module
+and accounts are quietly consuming attention without earning it back. This solution
 answers that with two complementary analytical models, run against the same sales
-data every other module uses — no separate data source, no manual tiering list to
-maintain.
+data the companion Power BI projects use — no separate data source, no manual
+tiering list to maintain.
 
 ## What this covers
 
@@ -33,8 +32,8 @@ maintain.
   distort the ranking.
 
 *Out of scope for this repository:* sales monitoring, inventory, pricing/margin,
-trade marketing, and sales planning are separate modules in the full solution — this
-repo covers portfolio/segmentation analytics only.
+trade marketing, and sales planning are covered in separate, standalone Power BI
+projects — this repo covers portfolio/segmentation analytics only.
 
 ## Architecture
 
@@ -65,7 +64,7 @@ flowchart LR
 | Doc | Contents |
 |---|---|
 | [Data Model](docs/data-model.md) | Star schema, ER diagram, table catalog, relationships, and the two-grain BCG design rationale |
-| [DAX Functions Used](docs/dax-functions.md) | The 3 shared time-intelligence functions this module calls |
+| [DAX Functions Used](docs/dax-functions.md) | The 3 shared time-intelligence functions this solution calls |
 | [DAX Measure Catalog](docs/dax-measures.md) | The full brand- and product-level BCG matrix logic plus both ABCD segmentation calculated columns |
 | [Report Tour](docs/report-pages.md) | Walkthrough of all 4 pages |
 
