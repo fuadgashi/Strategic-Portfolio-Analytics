@@ -8,9 +8,7 @@ segmentation on top of the same sales fact used in the companion Power BI projec
 
 > **Scope note.** This repository covers **Analytical Models** only — the BCG
 > growth-share matrix (brand and product level) and dynamic ABCD segmentation
-> (product and customer-outlet level). Sales monitoring, inventory, pricing &
-> margin, trade marketing, and sales planning are covered in separate, standalone
-> Power BI projects and are out of scope here.
+> (product and customer-outlet level).
 
 ## Entity-relationship diagram
 
