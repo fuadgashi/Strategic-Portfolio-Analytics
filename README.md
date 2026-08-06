@@ -1,4 +1,4 @@
-# BCG Analytics
+# Strategic-Portfolio-Analytics
 
 A **Power BI** portfolio-analytics solution built for a multi-brand FMCG/consumer-
 goods distribution business — a BCG growth-share matrix at brand and product grain,
