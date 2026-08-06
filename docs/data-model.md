@@ -49,6 +49,14 @@ erDiagram
 |---|---|
 | **BCG Growth-Share Matrix** | A 4-row calculated table (`Star` / `Cash Cow` / `Question Mark` / `Dog`, each with a sort order) plus measures that classify every brand and product into a quadrant from relative market share and YoY growth. Deliberately disconnected from the relationship graph — it hosts measures and a scatter-chart quadrant lookup, not filterable transactional data. |
 
+### Infrastructure (security & localization)
+
+| Table | Purpose |
+|---|---|
+| **Security** | Row-level-security table — one row per viewer, mapping a UPN to a **role** and a **culture**. Disconnected from the relationship graph; read only through `[User Culture]`. |
+| **Labels** | Plain data table — one row per page/visual, per culture, per label role. The source of every piece of user-facing text in the report. Disconnected from the relationship graph. |
+| **Dynamic Labels** | Measure-only table hosting one text measure per label, each a lookup against `Labels`. Full reference: [Dynamic Titles & Localization](dynamic-titles.md). |
+
 ## Relationships
 
 | From | To |
@@ -57,6 +65,23 @@ erDiagram
 | Sales Invoice Lines[ProductId] | Products[Id] |
 | Sales Invoice Lines[OutletId] | Customer Outlets[Id] |
 | Sales Invoice Lines[Date] | Calendar[Date] |
+
+## Row-level security & dynamic localization
+
+Three tables work together to drive a genuinely dynamic, bilingual UI — not two
+duplicated sets of pages: `Security` resolves *who* is looking and which culture
+they should see (`User Culture = SELECTEDVALUE(Security[Culture], "en-US")`);
+`Labels` holds *what* every label says, in every supported culture, keyed by a
+`PageKey` band scheme; `Dynamic Labels` holds *the lookup* — one measure per label,
+bound into the report through hidden action-button visuals rather than text boxes.
+
+The report ships with **English as the default culture** and **Albanian as a fully
+supported secondary culture**. Assign a viewer's row a different `Culture` value and
+every page and visual title relabels instantly; adding a third language means adding
+rows to `Labels`, not touching a single measure or rebuilding the report.
+
+Full reference — the key scheme, every label family worked through, the exact `fx`
+binding, and what changes to add a language: [Dynamic Titles & Localization](dynamic-titles.md).
 
 ## Design note: two BCG models at two different grains
 

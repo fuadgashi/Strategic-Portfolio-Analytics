@@ -11,4 +11,6 @@ percentile-segmentation logic in the [DAX catalog](dax-measures.md).
 | **Customer Grouping** | The same segmentation pattern applied to customer outlets by trailing-12-month sales & assortment breadth (distinct products purchased). |
 
 Both BCG pages and both grouping pages share the filter panel (date range,
-division/brand, product) and navigator shell used across the solution.
+division/brand, product) and navigator shell used across the solution — all
+localized through the dynamic title/label system described in
+[Dynamic Titles & Localization](dynamic-titles.md).

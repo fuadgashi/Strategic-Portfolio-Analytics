@@ -46,10 +46,13 @@ flowchart LR
     Sales --> Segmentation["Trailing-12-month percentile rank\n(sales x reach/breadth)"]
     Segmentation --> ProdGroup["Product Group A-D"]
     Segmentation --> OutletGroup["Outlet Group A-D"]
-    BrandBCG --> RPT[Report — 4 pages]
+    RLS["Row-Level Security\n(role + culture per user)"] --> RPT[Report — 4 pages]
+    BrandBCG --> RPT
     ProductBCG --> RPT
     ProdGroup --> RPT
     OutletGroup --> RPT
+    RPT --> EN[English UI]
+    RPT --> Alt[Second language UI\nswitched live]
 ```
 
 ## Tech stack
@@ -58,14 +61,17 @@ flowchart LR
 - **DAX user-defined functions** — reuses 3 functions from the solution's shared time-intelligence library (see [DAX Functions Used](docs/dax-functions.md))
 - **DAX measures & calculated columns** — the BCG models and ABCD segmentation logic (see [DAX Measure Catalog](docs/dax-measures.md))
 - **Power Query (M)** — SQL Server import and shaping
+- **Row-Level Security** — role- and culture-based, resolved from a single access-control table
+- **Dynamic localization** — a live culture toggle driving every page and visual title in the report from one measure
 
 ## Documentation
 
 | Doc | Contents |
 |---|---|
-| [Data Model](docs/data-model.md) | Star schema, ER diagram, table catalog, relationships, and the two-grain BCG design rationale |
+| [Data Model](docs/data-model.md) | Star schema, ER diagram, table catalog, relationships, RLS, and the two-grain BCG design rationale |
 | [DAX Functions Used](docs/dax-functions.md) | The 3 shared time-intelligence functions this solution calls |
 | [DAX Measure Catalog](docs/dax-measures.md) | The full brand- and product-level BCG matrix logic plus both ABCD segmentation calculated columns |
+| [Dynamic Titles & Localization](docs/dynamic-titles.md) | The `Security` → `Labels` → `Dynamic Labels` chain in full: the `PageKey` band scheme, every label family worked through, the exact report-visual binding, and what changes to add a language |
 | [Report Tour](docs/report-pages.md) | Walkthrough of all 4 pages |
 
 ## Highlights worth a closer look
@@ -82,6 +88,12 @@ flowchart LR
   and `Outlet Group` recompute every refresh from percentile rank, and their
   supporting sales/reach measures floor out negligible values (a handful of units,
   a single outlet) before they're allowed to distort a tier boundary.
+- **Titles bind to measures, never hardcoded text.** Every page title is a hidden
+  action-button visual with its title/subtitle bound via `fx` straight to a
+  `'Page N | Title'` measure — a text box can't take a measure binding, so this is
+  what keeps a title from silently going stale the moment someone edits the page. A
+  missing translation surfaces as a visible `⚠` instead of quietly falling back to
+  English. Full write-up: [Dynamic Titles & Localization](docs/dynamic-titles.md).
 
 ## License
 
